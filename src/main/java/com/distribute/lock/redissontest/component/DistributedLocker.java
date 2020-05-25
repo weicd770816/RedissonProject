@@ -1,6 +1,8 @@
 package com.distribute.lock.redissontest.component;
 
+import org.redisson.api.RCountDownLatch;
 import org.redisson.api.RLock;
+import org.redisson.api.RSemaphore;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,4 +17,8 @@ public interface DistributedLocker {
     boolean tryLock(String lockKey, TimeUnit unit, int waitTime, int leaseTime);
     void unlock(String lockKey);
     void unlock(RLock lock);
+
+    RCountDownLatch getCountDownLatch(String name);
+
+    RSemaphore getSemaphore(String name);
 }

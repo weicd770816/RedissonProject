@@ -1,6 +1,8 @@
 package com.distribute.lock.redissontest.component;
 
+import org.redisson.api.RCountDownLatch;
 import org.redisson.api.RLock;
+import org.redisson.api.RSemaphore;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -58,5 +60,17 @@ public class RedisDistributedLocker implements DistributedLocker {
     @Override
     public void unlock(RLock lock) {
         lock.unlock();
+    }
+
+    @Override
+    public RCountDownLatch getCountDownLatch(String name) {
+        RCountDownLatch countDownLatch = redissonClient.getCountDownLatch(name);
+        return countDownLatch;
+    }
+
+    @Override
+    public RSemaphore getSemaphore(String name) {
+        RSemaphore semaphore = redissonClient.getSemaphore(name);
+        return semaphore;
     }
 }
