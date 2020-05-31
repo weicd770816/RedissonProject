@@ -70,7 +70,6 @@ public class RedissonLockController {
         }finally {
             redisLockUtil.unlock(lockKey);//释放锁
         }
-        log.info("成功释放锁");
     }
 
     private void testCount() {
